@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		650964272DECEF4B00D9B54D /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 650964262DECEF4B00D9B54D /* SkeletonUI */; };
+		6509642A2DECEF5E00D9B54D /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 650964292DECEF5E00D9B54D /* InlineSnapshotTesting */; };
+		6509642C2DECEF5E00D9B54D /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 6509642B2DECEF5E00D9B54D /* SnapshotTesting */; };
+		6509642E2DECEF5E00D9B54D /* SnapshotTestingCustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 6509642D2DECEF5E00D9B54D /* SnapshotTestingCustomDump */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		650963042DECDB6300D9B54D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650964272DECEF4B00D9B54D /* SkeletonUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +74,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6509642E2DECEF5E00D9B54D /* SnapshotTestingCustomDump in Frameworks */,
+				6509642A2DECEF5E00D9B54D /* InlineSnapshotTesting in Frameworks */,
+				6509642C2DECEF5E00D9B54D /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +123,7 @@
 			);
 			name = InterTest;
 			packageProductDependencies = (
+				650964262DECEF4B00D9B54D /* SkeletonUI */,
 			);
 			productName = InterTest;
 			productReference = 650962F52DECDB6100D9B54D /* InterTest.app */;
@@ -158,6 +170,9 @@
 			);
 			name = InterTestUITests;
 			packageProductDependencies = (
+				650964292DECEF5E00D9B54D /* InlineSnapshotTesting */,
+				6509642B2DECEF5E00D9B54D /* SnapshotTesting */,
+				6509642D2DECEF5E00D9B54D /* SnapshotTestingCustomDump */,
 			);
 			productName = InterTestUITests;
 			productReference = 6509630D2DECDB6300D9B54D /* InterTestUITests.xctest */;
@@ -178,6 +193,7 @@
 					};
 					650963022DECDB6300D9B54D = {
 						CreatedOnToolsVersion = 16.4;
+						LastSwiftMigration = 1640;
 						TestTargetID = 650962F42DECDB6100D9B54D;
 					};
 					6509630C2DECDB6300D9B54D = {
@@ -195,6 +211,11 @@
 			);
 			mainGroup = 650962EC2DECDB6100D9B54D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				650964242DECEF1E00D9B54D /* XCRemoteSwiftPackageReference "Resolver" */,
+				650964252DECEF4B00D9B54D /* XCRemoteSwiftPackageReference "SkeletonUI" */,
+				650964282DECEF5E00D9B54D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 650962F62DECDB6100D9B54D /* Products */;
 			projectDirPath = "";
@@ -461,6 +482,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -472,6 +494,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InterTest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/InterTest";
@@ -483,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -583,6 +607,56 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		650964242DECEF1E00D9B54D /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
+		650964252DECEF4B00D9B54D /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CSolanaM/SkeletonUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.2;
+			};
+		};
+		650964282DECEF5E00D9B54D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		650964262DECEF4B00D9B54D /* SkeletonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 650964252DECEF4B00D9B54D /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			productName = SkeletonUI;
+		};
+		650964292DECEF5E00D9B54D /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 650964282DECEF5E00D9B54D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		6509642B2DECEF5E00D9B54D /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 650964282DECEF5E00D9B54D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		6509642D2DECEF5E00D9B54D /* SnapshotTestingCustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 650964282DECEF5E00D9B54D /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTestingCustomDump;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 650962ED2DECDB6100D9B54D /* Project object */;
 }
