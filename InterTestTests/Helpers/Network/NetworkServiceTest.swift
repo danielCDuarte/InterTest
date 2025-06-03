@@ -38,14 +38,14 @@ class NetworkServiceTest: XCTestCase {
         let expectationReceive = expectation(description: "receiveValue")
         let expectationFailure = expectation(description: "failure")
         expectationFailure.isInverted = true
-        let endPoint = NetworkRequest<APIVersionResponse>(
+        let endPoint = NetworkRequest<String>(
             method: .GET,
-            relativePath:DataConstants.WS.versions,
+            relativePath:DataConstants.WS.getVersion,
             parameters: nil
         )
         let decoder = JSONEncoder()
-        let usersURL = URL.getUrl(from: DataConstants.baseUrl + DataConstants.WS.versions)
-        let encodedData = try decoder.encode(TestDataConstants.apiVersionResponse)
+        let usersURL = URL.getUrl(from: DataConstants.baseUrl + DataConstants.WS.getVersion)
+        let encodedData = try decoder.encode(TestDataConstants.versionResponse)
         let jsonString = String(data: encodedData, encoding: .utf8)
         let jsonData = jsonString!.data(using: .utf8)!
         
@@ -85,9 +85,9 @@ class NetworkServiceTest: XCTestCase {
         expectationReceive.isInverted = true
         let expectationFailure = expectation(description: "Invalid.failure")
         
-        let endPoint = NetworkRequest<APIVersionResponse>(
+        let endPoint = NetworkRequest<String>(
             method: .GET,
-            relativePath:DataConstants.WS.versions,
+            relativePath:DataConstants.WS.getVersion,
             parameters: nil
         )
         
@@ -128,9 +128,9 @@ class NetworkServiceTest: XCTestCase {
         
         sut = NetworkService(url: "", urlSession: session)
         
-        let endPoint = NetworkRequest<APIVersionResponse>(
+        let endPoint = NetworkRequest<String>(
             method: .GET,
-            relativePath:DataConstants.WS.versions,
+            relativePath:DataConstants.WS.getVersion,
             parameters: nil
         )
         

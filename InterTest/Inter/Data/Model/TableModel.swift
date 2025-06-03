@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class TableModel: PersistentModel {
+class TableModel {
     var id: UUID
     var name: String
     init(id: UUID = UUID(), name: String) {
