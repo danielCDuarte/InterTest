@@ -12,4 +12,8 @@ struct TestDataConstants {
     static let apiVersionResponse: APIVersionResponse = {
         .init(numberVersion: 12, name: "Inter app")
     }()
+    
+    static let tableModel: TableModel = {
+        .init(name: "table 1")
+    }()
 }

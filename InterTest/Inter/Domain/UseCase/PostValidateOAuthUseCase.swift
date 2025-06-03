@@ -1,5 +1,5 @@
 //
-//  GetVersionUseCase.swift
+//  PostValidateOAuthUseCase.swift
 //  InterTest
 //
 //  Created by Daniel Crespo Duarte on 1/06/25.
@@ -8,15 +8,15 @@
 import Foundation
 import Combine
 
-class GetVersionUseCase: AnyUseCase< Any?, String> {
+class PostValidateOAuthUseCase: AnyUseCase< UserObject, OauthObject> {
     let repository: InterRepositoriesType
     
     init(repository: InterRepositoriesType) {
         self.repository = repository
     }
     
-    override func execute(params: Any?) -> AnyPublisher<String, any Error> {
-        return repository.getVersion()
+    override func execute(params: UserObject) -> AnyPublisher<OauthObject, any Error> {
+        return repository.postValidateOAuth(params)
             .eraseToAnyPublisher()
     }
 }

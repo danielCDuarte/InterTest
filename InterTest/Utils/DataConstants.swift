@@ -17,11 +17,11 @@ struct DataConstants {
     }
     
     struct WS {
-        static let versions: String = ""
-        static let oAuth: String = ""
-        static let sync: String = ""
-        static let localities: String = ""
+        static let getVersion: String = "apicontrollerpruebas/api/ParametrosFramework/ConsultarParametrosFramework/VPStoreAppControl"
+        static let postOAuth: String = "FtEntregaElectronica/MultiCanales/ApiSeguridadPruebas/api/Seguridad/AuthenticaUsuarioApp"
+        static let getSchemes: String = "apicontrollerpruebas/api/SincronizadorDatos/ObtenerEsquema/true"
+        static let getLocalities: String = "apicontrollerpruebas/api/ParametrosFramework/ObtenerLocalidadesRecogidas"
     }
     
-    static let baseUrl: String = "https://apitesting.interrapidisimo.co/FtEntregaElectronica/MultiCanales/ApiSeguridadPruebas/api/"
+    static let baseUrl: String = "https://apitesting.interrapidisimo.co/"
 }

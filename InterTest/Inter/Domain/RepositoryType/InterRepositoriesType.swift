@@ -9,8 +9,8 @@ import Combine
 import Foundation
 
 protocol InterRepositoriesType {
-    func getVersion()
-    func validateOAuth()
-    func getSync()
-    func getLocalities()
+    func getVersion() -> AnyPublisher<String, Error>
+    func postValidateOAuth(_ user: UserObject) -> AnyPublisher<OauthObject, any Error>
+    func getSchemes() -> AnyPublisher<[SchemeObject], Error>
+    func getLocalities() -> AnyPublisher<[LocalityObject], Error>
 }
