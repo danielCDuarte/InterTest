@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class GetSchemesUseCase: AnyUseCase< Any?, [SchemeObject]> {
+class GetSchemesUseCase: AnyUseCase<Any?, [SchemeObject]> {
     let repository: InterRepositoriesType
     
     init(repository: InterRepositoriesType) {

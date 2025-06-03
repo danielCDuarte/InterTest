@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class GetLocalitiesUseCase: AnyUseCase< Any?, [LocalityObject]> {
+class GetLocalitiesUseCase: AnyUseCase<Any?, [LocalityObject]> {
     let repository: InterRepositoriesType
     
     init(repository: InterRepositoriesType) {

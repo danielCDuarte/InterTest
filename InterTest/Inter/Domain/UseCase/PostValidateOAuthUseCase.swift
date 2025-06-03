@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class PostValidateOAuthUseCase: AnyUseCase< UserObject, OauthObject> {
+class PostValidateOAuthUseCase: AnyUseCase<UserObject, OauthObject> {
     let repository: InterRepositoriesType
     
     init(repository: InterRepositoriesType) {

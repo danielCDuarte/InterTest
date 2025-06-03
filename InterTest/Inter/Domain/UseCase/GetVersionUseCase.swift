@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class GetVersionUseCase: AnyUseCase< Any?, String> {
+class GetVersionUseCase: AnyUseCase<Any?, String> {
     let repository: InterRepositoriesType
     
     init(repository: InterRepositoriesType) {
