@@ -1,5 +1,5 @@
 //
-//  LocalityCellView.swift
+//  TableCellView.swift
 //  InterTest
 //
 //  Created by Daniel Crespo Duarte on 4/06/25.
@@ -8,25 +8,25 @@
 import SkeletonUI
 import SwiftUI
 
-struct LocalityCellView: View {
+struct TableCellView: View {
     
-    var locality: LocalityObject?
+    var scheme: SchemeObject?
     var loading: Bool
     
     
-    init(locality: LocalityObject?,
+    init(scheme: SchemeObject?,
          loading: Bool) {
-        self.locality = locality
+        self.scheme = scheme
         self.loading = loading
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(locality?.name)
+            Text(scheme?.nameTable)
                 .font(.subheadline)
                 .foregroundColor(.black)
                 .skeleton(with: loading , shape: .rectangle)
-            Text(locality?.cityAbbreviation)
+            Text(scheme?.updateDate)
                 .font(.subheadline)
                 .foregroundColor(.gray)
                 .skeleton(with: loading , shape: .rectangle)
@@ -36,5 +36,5 @@ struct LocalityCellView: View {
 }
 
 #Preview {
-    LocalityCellView(locality: .init(id: "1", name: "Medellin", cityAbbreviation: "MDE"), loading: true)
+    TableCellView(scheme: .init(nameTable: "AbreviaturasDireccion",batchSize: 12, numberOfFields: 12, updateDate: "2024-02-15T15:46:45.777"), loading: true)
 }

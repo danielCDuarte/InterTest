@@ -63,6 +63,7 @@ class InterRepositories: InterRepositoriesType {
         let endPoint = NetworkRequest<[APISchemeResponse]>(
             method: .GET,
             relativePath:DataConstants.WS.getSchemes,
+            headers: Constants.headers,
             parameters: nil
         )
         
@@ -76,6 +77,7 @@ class InterRepositories: InterRepositoriesType {
         let endPoint = NetworkRequest<[APILocalityResponse]>(
             method: .GET,
             relativePath:DataConstants.WS.getLocalities,
+            headers: Constants.headers,
             parameters: nil
         )
         

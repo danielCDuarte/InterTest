@@ -22,6 +22,12 @@ class NetworkService {
     private func getRequestHeaders<Response>(_ request: NetworkRequest<Response>) -> [String: String] {
         var headers: [String: String] = [:]
         headers[DataConstants.APIClient.contentType] = DataConstants.InnerConstants.applicationJson
+        
+        if let additionalHeaders = request.headers {
+            additionalHeaders.forEach { key, value in
+                headers[key] = value
+            }
+        }
         return headers
     }
     

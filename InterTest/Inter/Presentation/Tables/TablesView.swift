@@ -14,8 +14,21 @@ struct TablesView<ViewModelType>: View where ViewModelType: TablesViewModelType 
     @ObservedObject var viewModel: ViewModelType = Resolver.resolve()
     
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
-            
+        NavigationStack {
+            SkeletonList(with: viewModel.state.searchText.isEmpty ? viewModel.state.schemes : viewModel.state.searchSchemes ,
+                         quantity: viewModel.state.numberSkeletonCell) { loading, scheme in
+                TableCellView(scheme: scheme, loading: loading)
+            }
+            .listStyle(.inset)
+            .navigationBarTitle(TablesState.Constants.title, displayMode: .inline)
+            .searchable(
+                text: $viewModel.state.searchText,
+                placement: .navigationBarDrawer(displayMode: .always)
+            )
+            .textInputAutocapitalization(.never)
+            .onChange(of: viewModel.state.searchText) {
+                viewModel.searchTables(query: viewModel.state.searchText)
+            }
         }
         .onAppear {
             viewModel.onAppear()
@@ -23,12 +36,11 @@ struct TablesView<ViewModelType>: View where ViewModelType: TablesViewModelType 
         .onDisappear {
             viewModel.onDisAppear()
         }
-        .navigationBarTitle(TablesState.Constants.title, displayMode: .inline)
         .alert(isPresented: $viewModel.state.alert) {
             Alert(
                 title: Text(TablesState.Constants.error),
-                message: Text(TablesState.Constants.error),
-                dismissButton: .cancel(Text(TablesState.Constants.ok)))
+                message: Text(TablesState.Constants.errorMessage),
+                dismissButton: .cancel(Text(TablesState.Constants.accept)))
         }
     }
 }

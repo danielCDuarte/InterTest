@@ -23,9 +23,7 @@ struct SchemeMapper: MapperType {
             queryCreation: input.queryCreation,
             batchSize: input.batchSize,
             filter: input.filter,
-            error: input.error,
             numberOfFields: input.numberOfFields,
-            appMethod: input.appMethod,
             updateDate: input.updateDate
         )
     }

@@ -85,7 +85,9 @@ extension Resolver {
         }
         
         register(TablesViewModel.self){ _ in
-            return TablesViewModel()
+            return TablesViewModel(
+                getSchemesUseCase: resolve(AnyUseCase<Any?, [SchemeObject]>.self)
+            )
         }
     }
 }

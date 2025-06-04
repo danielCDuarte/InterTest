@@ -13,19 +13,16 @@ struct APISchemeResponse: Codable {
     var queryCreation: String?
     var batchSize: Int
     var filter: String?
-    var error: String?
     var numberOfFields: Int
-    var appMethod: String?
-    var updateDate: String?
+    var updateDate: String
+    
     private enum CodingKeys: String, CodingKey {
         case nameTable = "NombreTabla",
              primaryKey = "Pk",
              queryCreation = "QueryCreacion",
              batchSize = "BatchSize",
              filter = "Filtro",
-             error = "Error",
              numberOfFields = "NumeroCampos",
-             appMethod = "MetodoApp",
              updateDate = "FechaActualizacionSincro"
     }
 }

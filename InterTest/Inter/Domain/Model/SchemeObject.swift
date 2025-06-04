@@ -7,14 +7,13 @@
 
 import Foundation
 
-struct SchemeObject {
+struct SchemeObject: Identifiable {
+    let id = UUID()
     var nameTable: String?
     var primaryKey: String?
     var queryCreation: String?
     var batchSize: Int
     var filter: String?
-    var error: String?
     var numberOfFields: Int
-    var appMethod: String?
     var updateDate: String?
 }
