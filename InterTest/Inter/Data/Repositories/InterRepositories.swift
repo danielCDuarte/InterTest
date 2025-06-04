@@ -39,17 +39,17 @@ class InterRepositories: InterRepositoriesType {
         .eraseToAnyPublisher()
     }
     
-    func postValidateOAuth(_ user: UserObject) -> AnyPublisher<OauthObject, any Error> {
+    func postValidateOAuth(_ userParams: UserParamsObject) -> AnyPublisher<OauthObject, any Error> {
         let endPoint = NetworkRequest<APIOauthResponse>(
             method: .POST,
             relativePath:DataConstants.WS.postOAuth,
             headers: Constants.headers,
             parameters: [
-                "Mac": user.mac,
-                "NomAplicacion": user.nameAplication,
-                "Password": user.password,
-                "Path": user.path,
-                "Usuario": user.userName
+                "Mac": userParams.mac,
+                "NomAplicacion": userParams.nameAplication,
+                "Password": userParams.password,
+                "Path": userParams.path,
+                "Usuario": userParams.userName
             ],
         )
         

@@ -39,7 +39,7 @@ class PostValidateOAuthUseCaseTest: XCTestCase {
         InterRepositoriesStub.responsePostValidateOAuth = TestDomainConstants.oAuthResponse
         
         //When
-        cancellable = sut.execute(params: TestDomainConstants.paramsUserObject)
+        cancellable = sut.execute(params: TestDomainConstants.userParams)
             .sink { completion in
                 guard case .failure(let error) = completion else { return }
                 XCTFail(error.localizedDescription)
@@ -63,7 +63,7 @@ class PostValidateOAuthUseCaseTest: XCTestCase {
         InterRepositoriesStub.error = NetworkError.emptyJson
         
         //When
-        cancellable = sut.execute(params: TestDomainConstants.paramsUserObject)
+        cancellable = sut.execute(params: TestDomainConstants.userParams)
             .sink(
                 receiveCompletion: { completion in
                     guard case .failure(let error) = completion else { return

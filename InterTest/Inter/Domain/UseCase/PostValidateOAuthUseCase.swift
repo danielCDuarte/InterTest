@@ -8,14 +8,14 @@
 import Foundation
 import Combine
 
-class PostValidateOAuthUseCase: AnyUseCase<UserObject, OauthObject> {
+class PostValidateOAuthUseCase: AnyUseCase<UserParamsObject, OauthObject> {
     let repository: InterRepositoriesType
     
     init(repository: InterRepositoriesType) {
         self.repository = repository
     }
     
-    override func execute(params: UserObject) -> AnyPublisher<OauthObject, any Error> {
+    override func execute(params: UserParamsObject) -> AnyPublisher<OauthObject, any Error> {
         return repository.postValidateOAuth(params)
             .eraseToAnyPublisher()
     }

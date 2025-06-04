@@ -27,7 +27,7 @@ extension InterRepositoriesStub: InterRepositoriesType {
         return publisher.eraseToAnyPublisher()
     }
     
-    func postValidateOAuth(_ user: UserObject) -> AnyPublisher<OauthObject, any Error> {
+    func postValidateOAuth(_ userParams: UserParamsObject) -> AnyPublisher<OauthObject, any Error> {
         let data = InterRepositoriesStub.responsePostValidateOAuth ?? OauthObject(id: "", name: "", user: "")
         let publisher = CurrentValueSubject<OauthObject, Error>(data)
         

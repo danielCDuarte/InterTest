@@ -10,7 +10,7 @@ import Foundation
 
 protocol InterRepositoriesType {
     func getVersion() -> AnyPublisher<String, Error>
-    func postValidateOAuth(_ user: UserObject) -> AnyPublisher<OauthObject, any Error>
+    func postValidateOAuth(_ userParams: UserParamsObject) -> AnyPublisher<OauthObject, any Error>
     func getSchemes() -> AnyPublisher<[SchemeObject], Error>
     func getLocalities() -> AnyPublisher<[LocalityObject], Error>
 }

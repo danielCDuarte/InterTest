@@ -40,7 +40,7 @@ extension Resolver {
         
         register {
             PostValidateOAuthUseCase(repository: resolve(InterRepositoriesType.self))
-        }.implements( AnyUseCase<UserObject, OauthObject>.self)
+        }.implements( AnyUseCase<UserParamsObject, OauthObject>.self)
         
         register {
             GetSchemesUseCase(repository: resolve(InterRepositoriesType.self))
@@ -52,7 +52,8 @@ extension Resolver {
         
         let sharedModelContainer: ModelContainer = {
             let schema = Schema([
-                TableModel.self,
+                SchemeModel.self,
+                UserModel.self
             ])
             let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

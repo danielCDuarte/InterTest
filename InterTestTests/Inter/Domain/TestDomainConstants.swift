@@ -9,7 +9,7 @@ import Foundation
 @testable import InterTest
 
 struct TestDomainConstants {
-    static let paramsUserObject: UserObject = {
+    static let userParams: UserParamsObject = {
         .init(
             mac: "",
             nameAplication: "Controller APP",
