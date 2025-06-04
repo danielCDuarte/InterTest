@@ -9,15 +9,22 @@ import Foundation
 import SwiftUI
 
 final class HomeState: ObservableObject {
+    @Published var oAuth: OauthObject?
     @Published var isLoading: Bool = true
-    @Published var numberSkeletonCell: Int = 8
     @Published var alert: Bool = false
-    @Published var searchText = ""
+    @Published var alertUpdateVersion: Bool = false
+    @Published var versionUpdateMessage: String = ""
     
     enum Constants {
         static let title = "Home"
         static let error = "Error"
-        static let errorMessage = "An error has occurred"
-        static let ok = "Ok"
+        static let errorMessage = "Se produjo un error, vuelve a intentarlo más tarde"
+        static let accept = "Aceptar"
+        static let versionUpdate = "Versión desactualizada"
+        static let versionUpdateMessage = "Actualice la versión de la app a la #:"
+        static let name = "Usuario: "
+        static let username = "Nombre de usuario: "
+        static let schemes = "Tablas"
+        static let localities = "Localidades"
     }
 }

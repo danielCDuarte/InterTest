@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocalityObject {
+struct LocalityObject: Identifiable {
     var id: String
     var name: String
     var cityAbbreviation: String

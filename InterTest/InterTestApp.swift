@@ -13,7 +13,7 @@ struct InterTestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            //HomeView<HomeViewModel>()
+            HomeView<HomeViewModel>()
         }
     }
 }

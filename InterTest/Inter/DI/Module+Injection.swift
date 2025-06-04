@@ -71,6 +71,21 @@ extension Resolver {
     }
     
     static func registerPresentation() {
-     
+        register(HomeViewModel.self){ _ in
+            return HomeViewModel(
+                getVersionUseCase: resolve(AnyUseCase<Any?, String>.self),
+                postValidateOAuthUseCase: resolve(AnyUseCase<UserParamsObject, OauthObject>.self),
+                persistenceService: resolve(PersistenceServiceType.self))
+        }
+        
+        register(LocalitiesViewModel.self){ _ in
+            return LocalitiesViewModel(
+                getLocalitiesUseCase: resolve(AnyUseCase<Any?, [LocalityObject]>.self)
+            )
+        }
+        
+        register(TablesViewModel.self){ _ in
+            return TablesViewModel()
+        }
     }
 }
