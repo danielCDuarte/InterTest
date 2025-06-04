@@ -9,8 +9,11 @@ import SwiftUI
 
 @main
 struct InterTestApp: App {
+    let factory = Factory(baseUrl: DataConstants.baseUrl)
+
     var body: some Scene {
         WindowGroup {
+            HomeView<HomeViewModel>()
         }
     }
 }
