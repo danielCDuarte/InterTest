@@ -1,24 +1,24 @@
 //
-//  SchemeMapper.swift
+//  SchemeModelMapper.swift
 //  InterTest
 //
-//  Created by Daniel Crespo Duarte on 3/06/25.
+//  Created by Daniel Crespo Duarte on 4/06/25.
 //
 
 import Foundation
 
-struct SchemeMapper: MapperType {
-    typealias Input = [APISchemeResponse]
+struct SchemeModelMapper: MapperType {
+    typealias Input = [SchemeModel]
     typealias Output = [SchemeObject]
     
     
-    static func map(input: [APISchemeResponse]) -> [SchemeObject] {
+    static func map(input: [SchemeModel]) -> [SchemeObject] {
         return input.map {
             getScheme(input: $0)
         }
     }
     
-    private static func getScheme(input: APISchemeResponse) -> SchemeObject {
+    private static func getScheme(input: SchemeModel) -> SchemeObject {
         return .init(
             nameTable: input.nameTable,
             primaryKey: input.primaryKey,

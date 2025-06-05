@@ -8,14 +8,14 @@
 import Foundation
 import Combine
 
-class GetSchemesUseCase: AnyUseCase<Any?, [SchemeObject]> {
+class GetSchemesUseCase: AnyUseCase<String, [SchemeObject]> {
     let repository: InterRepositoriesType
     
     init(repository: InterRepositoriesType) {
         self.repository = repository
     }
     
-    override func execute(params: Any?) -> AnyPublisher<[SchemeObject], any Error> {
+    override func execute(params: String) -> AnyPublisher<[SchemeObject], any Error> {
         return repository.getSchemes()
             .eraseToAnyPublisher()
     }

@@ -12,7 +12,6 @@ class NetworkService {
     var baseURL: URL?
     var urlSession: URLSession
     
-    
     init(url: String,
          urlSession: URLSession) {
         self.baseURL = URL(string: url)

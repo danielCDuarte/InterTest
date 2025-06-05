@@ -20,6 +20,28 @@ extension Resolver {
 
 extension Resolver {
     static func registerData(with baseUrl: String) {
+        let sharedModelContainer: ModelContainer = {
+            let schema = Schema([
+                SchemeModel.self,
+                UserModel.self
+            ])
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+            do {
+                return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            } catch {
+                fatalError("Could not create ModelContainer: \(error)")
+            }
+        }()
+        
+        register {
+            PersistenceService(container: sharedModelContainer)
+        }.implements(PersistenceServiceType.self)
+        
+        register {
+            PersistenceRepositories(persistenceService: resolve(PersistenceServiceType.self))
+        }.implements(PersistenceRepositoriesType.self)
+        
         register {
             URLSession(configuration: URLSession.configuration())
         }
@@ -44,29 +66,27 @@ extension Resolver {
         
         register {
             GetSchemesUseCase(repository: resolve(InterRepositoriesType.self))
-        }.implements( AnyUseCase<Any?, [SchemeObject]>.self)
+        }.implements( AnyUseCase<String, [SchemeObject]>.self)
         
         register {
             GetLocalitiesUseCase(repository: resolve(InterRepositoriesType.self))
         }.implements(AnyUseCase<Any?, [LocalityObject]>.self)
         
-        let sharedModelContainer: ModelContainer = {
-            let schema = Schema([
-                SchemeModel.self,
-                UserModel.self
-            ])
-            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-            do {
-                return try ModelContainer(for: schema, configurations: [modelConfiguration])
-            } catch {
-                fatalError("Could not create ModelContainer: \(error)")
-            }
-        }()
+        register {
+            SaveOauthUseCase(persistenceRepositories: resolve(PersistenceRepositoriesType.self))
+        }.implements(AnyUseCase<OauthObject, Void>.self)
         
         register {
-            PersistenceService(container: sharedModelContainer)
-        }.implements(PersistenceServiceType.self)
+            FetchUserModelUseCase(persistenceRepositories: resolve(PersistenceRepositoriesType.self))
+        }.implements(AnyUseCase<Any?, OauthObject>.self)
+        
+        register {
+            SaveSchemeUseCase(persistenceRepositories: resolve(PersistenceRepositoriesType.self))
+        }.implements(AnyUseCase<SchemeObject, Void>.self)
+        
+        register {
+            FetchTablesModelUseCase(persistenceRepositories: resolve(PersistenceRepositoriesType.self))
+        }.implements(AnyUseCase<Any?, [SchemeObject]>.self)
         
     }
     
@@ -75,7 +95,9 @@ extension Resolver {
             return HomeViewModel(
                 getVersionUseCase: resolve(AnyUseCase<Any?, String>.self),
                 postValidateOAuthUseCase: resolve(AnyUseCase<UserParamsObject, OauthObject>.self),
-                persistenceService: resolve(PersistenceServiceType.self))
+                fetchUserModelUseCase: resolve(AnyUseCase<Any?, OauthObject>.self),
+                saveOauthUseCase: resolve(AnyUseCase<OauthObject, Void>.self)
+            )
         }
         
         register(LocalitiesViewModel.self){ _ in
@@ -86,7 +108,9 @@ extension Resolver {
         
         register(TablesViewModel.self){ _ in
             return TablesViewModel(
-                getSchemesUseCase: resolve(AnyUseCase<Any?, [SchemeObject]>.self)
+                getSchemesUseCase: resolve(AnyUseCase<String, [SchemeObject]>.self),
+                fetchTablesModelUseCase: resolve(AnyUseCase<Any?, [SchemeObject]>.self),
+                saveSchemeUseCase: resolve(AnyUseCase<SchemeObject, Void>.self)
             )
         }
     }

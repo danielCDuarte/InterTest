@@ -66,4 +66,14 @@ class PersistenceService: PersistenceServiceType {
             throw PersistenceError.deleteFailed(error)
         }
     }
+    
+    func doesNotExist<T>(_ type: T.Type, matching predicate: Predicate<T>) throws -> Bool where T : PersistentModel {
+        let descriptor = FetchDescriptor<T>(predicate: predicate)
+        do {
+            let results = try modelContext.fetch(descriptor)
+            return results.isEmpty
+        } catch {
+            throw PersistenceError.fetchFailed(error)
+        }
+    }
 }

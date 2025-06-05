@@ -17,17 +17,21 @@ final class HomeViewModel: BaseViewModel {
     
     private let getVersionUseCase: AnyUseCase<Any?, String>
     private let postValidateOAuthUseCase: AnyUseCase<UserParamsObject, OauthObject>
-    private let persistenceService: PersistenceServiceType
+    private let fetchUserModelUseCase: AnyUseCase<Any?, OauthObject>
+    private let saveOauthUseCase: AnyUseCase<OauthObject, Void>
     
-    init(getVersionUseCase: AnyUseCase<Any?, String>,
-         postValidateOAuthUseCase: AnyUseCase<UserParamsObject, OauthObject>,
-         persistenceService: PersistenceServiceType) {
-        self.getVersionUseCase = getVersionUseCase
-        self.postValidateOAuthUseCase = postValidateOAuthUseCase
-        self.persistenceService = persistenceService
-        super.init()
-        errorHandler = self
-    }
+    init(
+        getVersionUseCase: AnyUseCase<Any?, String>,
+        postValidateOAuthUseCase: AnyUseCase<UserParamsObject, OauthObject>,
+        fetchUserModelUseCase: AnyUseCase<Any?, OauthObject>,
+        saveOauthUseCase: AnyUseCase<OauthObject, Void>) {
+            self.getVersionUseCase = getVersionUseCase
+            self.postValidateOAuthUseCase = postValidateOAuthUseCase
+            self.fetchUserModelUseCase = fetchUserModelUseCase
+            self.saveOauthUseCase = saveOauthUseCase
+            super.init()
+            errorHandler = self
+        }
     
     private func getVersion() {
         getVersionUseCase.execute(params: nil)
@@ -49,6 +53,30 @@ final class HomeViewModel: BaseViewModel {
         }
     }
     
+    private func validateOAuth() {
+        fetchUserModelUseCase.execute(params: nil)
+            .sink { [weak self] completion in
+                guard case .failure(let error) = completion else { return }
+                switch error {
+                case PersistenceError.itemNotFound:
+                    self?.postValidateOAuth()
+                default:
+                    self?.showError(error: error)
+                }
+                
+            } receiveValue: { [weak self] user in
+                self?.bindvalidateOAuth(user)
+            }
+            .store(in: &subscribers)
+    }
+    
+    private func bindvalidateOAuth(_ user: OauthObject) {
+        oAuth = user
+        state.oAuth = user
+        state.isLoading = false
+        objectWillChange.send()
+    }
+    
     private func postValidateOAuth(){
         postValidateOAuthUseCase.execute(params:
                 .init(
@@ -56,27 +84,33 @@ final class HomeViewModel: BaseViewModel {
                     nameAplication: "Controller APP",
                     password: "SW50ZXIyMDIx\n",
                     path: "",
-                    userName: "cGFtLm1lcmVkeTIx\n")
+                    userName: "cGFtLm1lcmVkeTIx\n"
+                )
         ).sink { [weak self] completion in
-                guard case .failure(let error) = completion else { return }
-                self?.showError(error: error)
-            } receiveValue: { [weak self] oAuth in
-                self?.bindUser(with: oAuth)
-            }
-            .store(in: &subscribers)
+            guard case .failure(let error) = completion else { return }
+            self?.showError(error: error)
+        } receiveValue: { [weak self] oAuth in
+            self?.bindUser(with: oAuth)
+        }
+        .store(in: &subscribers)
     }
     
     private func bindUser(with oAuth: OauthObject) {
-        state.oAuth = oAuth
-        state.isLoading = false
-        objectWillChange.send()
+        saveOauthUseCase.execute(params: oAuth)
+            .sink { [weak self] completion in
+                guard case .failure(let error) = completion else { return }
+                self?.showError(error: error)
+            } receiveValue: { [weak self] in
+                self?.validateOAuth()
+            }
+            .store(in: &subscribers)
     }
 }
 
 extension HomeViewModel: HomeViewModelType {
     func onAppear() {
         getVersion()
-        postValidateOAuth()
+        validateOAuth()
     }
     
     func onDisAppear() {
