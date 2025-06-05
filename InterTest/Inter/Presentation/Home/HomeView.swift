@@ -39,39 +39,20 @@ struct HomeView<ViewModelType>: View where ViewModelType: HomeViewModelType {
                     NavigationLink {
                         TablesView<TablesViewModel>()
                     } label: {
-                        HStack {
-                            Image(systemName: "tablecells")
-                                .font(.title2)
-                            Text(HomeState.Constants.schemes)
-                                .font(.headline)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                        }
-                        .padding()
-                        .skeleton(with: viewModel.state.isLoading , shape: .rectangle)
-                        .disabled(viewModel.state.isLoading)
-                        .foregroundColor(.white)
-                        .background(.cyan)
-                        .cornerRadius(12)
+                        NavigationButton(
+                            icon: "tablecells",
+                            title: HomeState.Constants.schemes,
+                            loading: viewModel.state.isLoading
+                        )
                     }
-                    
                     NavigationLink {
                         LocalitiesView<LocalitiesViewModel>()
                     } label: {
-                        HStack {
-                            Image(systemName: "mappin.and.ellipse")
-                                .font(.title2)
-                            Text(HomeState.Constants.localities)
-                                .font(.headline)
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                        }
-                        .padding()
-                        .skeleton(with: viewModel.state.isLoading , shape: .rectangle)
-                        .disabled(viewModel.state.isLoading)
-                        .foregroundColor(.white)
-                        .background(.cyan)
-                        .cornerRadius(12)
+                        NavigationButton(
+                            icon: "mappin.and.ellipse",
+                            title: HomeState.Constants.localities,
+                            loading: viewModel.state.isLoading
+                        )
                     }
                 }
                 .padding(.horizontal)

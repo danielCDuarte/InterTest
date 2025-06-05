@@ -15,5 +15,4 @@ protocol PersistenceServiceType {
     func update<T: PersistentModel>(_ item: T) throws
     func delete<T: PersistentModel>(_ item: T) throws
     func deleteAll<T: PersistentModel>(_ type: T.Type) throws
-    func doesNotExist<T: PersistentModel>(_ type: T.Type,matching predicate: Predicate<T>) throws -> Bool
 }

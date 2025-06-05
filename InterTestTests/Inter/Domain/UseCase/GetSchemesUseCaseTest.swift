@@ -39,7 +39,7 @@ class GetSchemesUseCaseTest: XCTestCase {
         InterRepositoriesStub.responseGetSchemes = TestDomainConstants.schemesResponse
         
         //When
-        cancellable = sut.execute(params: nil)
+        cancellable = sut.execute(params: "")
             .sink { completion in
                 guard case .failure(let error) = completion else { return }
                 XCTFail(error.localizedDescription)
@@ -63,7 +63,7 @@ class GetSchemesUseCaseTest: XCTestCase {
         InterRepositoriesStub.error = NetworkError.emptyJson
         
         //When
-        cancellable = sut.execute(params: nil)
+        cancellable = sut.execute(params: "")
             .sink(
                 receiveCompletion: { completion in
                     guard case .failure(let error) = completion else { return
