@@ -35,6 +35,16 @@ struct TestDomainConstants {
         ]
     }()
     
+    static let schemeResponse: SchemeObject = {
+        .init(
+            nameTable: "AbreviaturasDireccion",
+            primaryKey: "AD_id",
+            queryCreation: "CREATE TABLE AbreviaturasDireccion( \r\nAD_id int NOT NULL,\r\nAD_abreviatura nvarchar (50) NOT NULL,\r\nAnchor varbinary (8) NOT NULL,PRIMARY KEY (AD_id))\r\n",
+            batchSize: 300,
+            filter: "",
+            numberOfFields: 3,
+            updateDate: "2024-02-15T15:46:45.777")
+    }()
     static let schemesResponse: [SchemeObject] = {
         return [
             .init(

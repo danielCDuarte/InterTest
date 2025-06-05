@@ -18,6 +18,8 @@ extension Resolver  {
         mock.register { InterRepositoriesStub() }
             .implements(InterRepositoriesType.self)
         
+        mock.register { PersistenceRepositoriesStub() }
+            .implements(PersistenceRepositoriesType.self)
     }
     
 }
